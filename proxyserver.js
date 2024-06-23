@@ -23,13 +23,13 @@ app.use('/api', createProxyMiddleware({
   },
   onProxyReq: (proxyReq, req, res) => {
     console.log('Proxying request to:', proxyReq.path);
-    // const apiKey = process.env.CMC_API_KEY;
-    // if (apiKey) {
-    //   //proxyReq.setHeader('X-CMC_PRO_API_KEY', apiKey);
-    //   console.log('Added API key to headers:', apiKey);
-    // } else {
-    //   console.error('API key is missing from environment variables');
-    // }
+    const apiKey = process.env.CMC_API_KEY;
+    if (apiKey) {
+      proxyReq.setHeader('X-CMC_PRO_API_KEY', apiKey);
+      console.log('Added API key to headers:', apiKey);
+    } else {
+      console.error('API key is missing from environment variables');
+    }
     console.log('Outgoing request headers:', proxyReq.getHeaders());
   },
   onProxyRes: (proxyRes, req, res) => {
