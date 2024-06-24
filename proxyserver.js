@@ -3,9 +3,9 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 6001;
+const port = process.env.PORT || 443;
 
-// Middleware to handle CORS
+// Middleware to handle CORS (should be before any other middleware)
 app.use((req, res, next) => {
   console.log('Incoming request to:', req.url);
   res.header('Access-Control-Allow-Origin', '*');
@@ -38,6 +38,7 @@ app.use('/api', createProxyMiddleware({
   },
   onError: (err, req, res) => {
     console.error('Proxy error:', err);
+    res.status(500).send('Proxy error occurred. Please try again later.');
   },
 }));
 
