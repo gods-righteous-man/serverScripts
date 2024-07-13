@@ -10,7 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Atlas connection URI
-const uri = process.env.MONGODB_URI;
+// const uri = process.env.MONGODB_URI;
+// const uri = "mongodb+srv://gaurav0@cluster0.cepgukq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // MongoDB client instance
 const client = new MongoClient(uri, {
